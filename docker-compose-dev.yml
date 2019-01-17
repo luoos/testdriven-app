@@ -14,3 +14,15 @@ services:
       - FLASK_APP=main.py
       - FLASK_ENV=development
       - FLASK_CONFIG=development
+    depends_on:
+      - users-db
+
+  users-db:
+    build:
+      context: ./services/users/app/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
