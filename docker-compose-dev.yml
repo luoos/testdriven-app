@@ -14,6 +14,8 @@ services:
       - FLASK_APP=main.py
       - FLASK_ENV=development
       - FLASK_CONFIG=development
+      - DATABASE_DEV_URL=postgres://postgres:postgres@users-db:5432/users_dev
+      - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
     depends_on:
       - users-db
 

@@ -25,3 +25,10 @@ Navigate to http://localhost:5001/users/ping, you should see the following JSON 
   "status": "success"
 }
 ```
+
+#### Testing
+
+```shell
+docker-compose -f docker-compose-dev.yml up -d --build
+docker-compose -f docker-compose-dev.yml run users flask test
+```
