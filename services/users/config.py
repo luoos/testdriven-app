@@ -6,6 +6,7 @@ class BaseConfig:
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'Dont fool me, I am smart'
+    USERS_PER_PAGE = 20
 
 
 class DevelopmentConfig(BaseConfig):
