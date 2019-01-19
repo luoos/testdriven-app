@@ -8,4 +8,4 @@ done
 
 echo "PostgreSQL started"
 
-flask run -h 0.0.0.0
+exec gunicorn -b 0.0.0.0:5000 main:app
