@@ -5,6 +5,10 @@ from app.models import User
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
+@app.shell_context_processor
+def ctx():
+    return {'app': app, 'db': db}
+
 @app.cli.command()
 def recreate_db():
     db.drop_all()
