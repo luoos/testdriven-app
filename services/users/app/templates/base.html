@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+    {% block title %}Document{% endblock title %}
+    </title>
+
+    {% block css %}
+    <link
+      href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
+      rel="stylesheet"
+    >
+    {% endblock css%}
+
+{% endblock %}
+</head>
+<body>
+{% block body %}
+
+{% endblock body %}
+</body>
+</html>
