@@ -5,12 +5,14 @@ from . import api
 from app import db
 from app.models import User
 
+
 @api.route('/users/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
         'status': 'success',
         'message': 'pong!'
     })
+
 
 @api.route('/users', methods=['POST'])
 def add_user():
@@ -34,9 +36,10 @@ def add_user():
         else:
             response_object['message'] = 'Sorry, That email already exists'
             return jsonify(response_object), 400
-    except exc.IntegrityError as e:
+    except exc.IntegrityError:
         db.session.rollback()
         return jsonify(response_object), 400
+
 
 @api.route('/user/<user_id>', methods=['GET'])
 def get_single_user(user_id):
@@ -63,12 +66,16 @@ def get_single_user(user_id):
     except ValueError:
         return jsonify(response_object), 404
 
+
 @api.route('/users', methods=['GET'])
 def get_all_users():
     """Get all users"""
     page = request.args.get('page', 1, type=int)
-    pagination = User.query.paginate(page,
-            per_page=current_app.config['USERS_PER_PAGE'], error_out=False)
+    pagination = User.query.paginate(
+        page,
+        per_page=current_app.config['USERS_PER_PAGE'],
+        error_out=False
+    )
     users = pagination.items
     prev, next = None, None
     if pagination.has_prev:
