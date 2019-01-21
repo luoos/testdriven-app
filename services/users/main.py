@@ -1,7 +1,14 @@
 import os
+import coverage
 
 from app import create_app, db
 from app.models import User
+
+COV = coverage.coverage(
+    branch=True,
+    include='app/*'
+)
+COV.start()
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
@@ -21,6 +28,12 @@ def test():
     tests = unittest.TestLoader().discover('tests')
     result = unittest.TextTestRunner(verbosity=2).run(tests)
     if result.wasSuccessful():
+        COV.stop()
+        COV.save()
+        print('Coverage Summary:')
+        COV.report()
+        COV.html_report()
+        COV.erase()
         return 0
     return 1
 
