@@ -1,5 +1,7 @@
 # TestDriven App
 
+[![Build Status](https://travis-ci.org/luoos/testdriven-app.svg?branch=master)](https://travis-ci.org/luoos/testdriven-app)
+
 This is a project from [testdriven.io](https://testdriven.io/courses/microservices-with-docker-flask-and-react).
 
 It contains many microservices.
