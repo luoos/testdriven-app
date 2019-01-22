@@ -1,14 +1,18 @@
 import os
-import coverage
 
+COV = None
+if os.environ.get('FLASK_COVERAGE'):
+    import coverage
+    COV = coverage.coverage(
+        branch=True,
+        include='app/*'
+    )
+    COV.start()
+
+import sys
+import click
 from app import create_app, db
 from app.models import User
-
-COV = coverage.coverage(
-    branch=True,
-    include='app/*'
-)
-COV.start()
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
@@ -23,19 +27,29 @@ def recreate_db():
     db.session.commit()
 
 @app.cli.command()
-def test():
+@click.option('--coverage/--no-coverage', default=False,
+              help='Run tests under code coverage.')
+def test(coverage):
+    """Run the unit test"""
+    if coverage and not os.environ.get('FLASK_COVERAGE'):
+        import subprocess
+        os.environ['FLASK_COVERAGE'] = '1'
+        sys.exit(subprocess.call(sys.argv))
+
     import unittest
     tests = unittest.TestLoader().discover('tests')
     result = unittest.TextTestRunner(verbosity=2).run(tests)
-    if result.wasSuccessful():
+    if COV:
         COV.stop()
         COV.save()
         print('Coverage Summary:')
         COV.report()
         COV.html_report()
         COV.erase()
+    if result.wasSuccessful():
         return 0
-    return 1
+    else:
+        return 1
 
 @app.cli.command()
 def seed_db():
