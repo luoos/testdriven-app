@@ -20,7 +20,7 @@ docker-compose -f docker-compose-dev.yml up
 docker-compose -f docker-compose-dev.yml up --build
 ```
 
-Navigate to http://localhost:5001/users/ping, you should see the following JSON response:
+Navigate to http://localhost:5001/users/ping or http://localhost/users/ping, you should see the following JSON response:
 ```javascript
 {
   "message": "pong!",
@@ -32,5 +32,5 @@ Navigate to http://localhost:5001/users/ping, you should see the following JSON 
 
 ```shell
 docker-compose -f docker-compose-dev.yml up -d --build
-docker-compose -f docker-compose-dev.yml run users flask test
+docker-compose -f docker-compose-dev.yml exec users flask test --coverage
 ```
