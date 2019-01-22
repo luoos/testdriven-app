@@ -2,6 +2,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+Before running the app, an env variable should be set up:
+```
+export REACT_APP_USERS_SERVICE_URL=http://localhost
+```
+
 In the project directory, you can run:
 
 ### `npm start`
@@ -16,6 +21,12 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `react-scripts test --coverage`
+
+Runs tests with code coverage.
+
+May need to globally install React Scripts: `npm install react-scripts --global`
 
 ### `npm run build`
 
