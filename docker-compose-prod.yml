@@ -2,6 +2,19 @@ version: '3.6'
 
 services:
 
+  client:
+    container_name: client
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile-prod
+      args:
+        - NODE_ENV=production
+        - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    ports:
+      - '3007:80'
+    depends_on:
+      - users
+
   nginx:
     build:
       context: ./services/nginx
@@ -11,6 +24,7 @@ services:
       - 80:80
     depends_on:
       - users
+      - client
 
   users:
     build:
