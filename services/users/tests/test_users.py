@@ -28,7 +28,7 @@ class TestUserService(BaseTestCase):
     def test_add_user(self):
         """Ensure a new user can be added to the database"""
         response = self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
                 'email': 'greatjohn@doe.com'
@@ -43,7 +43,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_invalid_json(self):
         """Ensure error is thrown if the JSON object is empty"""
         response = self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({}),
             content_type='application/json'
         )
@@ -55,7 +55,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_invalid_json_keys(self):
         """Ensure error is thrown if the JSON object does not have a username or an email key"""
         response = self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({'email': 'greatjohn@doe.com'}),
             content_type='application/json'
         )
@@ -65,7 +65,7 @@ class TestUserService(BaseTestCase):
         self.assertIn('fail', data['status'])
 
         response = self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({'username': 'John Doe'}),
             content_type='application/json'
         )
@@ -78,7 +78,7 @@ class TestUserService(BaseTestCase):
     def test_add_user_duplicate_email(self):
         """Ensure error is thrown if the email already exist"""
         self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
                 'email': 'greatjohn@doe.com'
@@ -86,7 +86,7 @@ class TestUserService(BaseTestCase):
             content_type='application/json'
         )
         response = self.client.post(
-            'api/v1/users',
+            'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
                 'email': 'greatjohn@doe.com'

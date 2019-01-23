@@ -14,7 +14,7 @@ def ping_pong():
     })
 
 
-@api.route('/users', methods=['POST'])
+@api.route('/user', methods=['POST'])
 def add_user():
     post_data = request.get_json()
     response_object = {
