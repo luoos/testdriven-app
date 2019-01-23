@@ -27,13 +27,13 @@ describe('<UsersList />', () => {
   });
 
   it('should render two h4 elements', () => {
-    let element = wrapper.find('h4');
+    const element = wrapper.find('h4');
     expect(element.length).toBe(2);
     expect(element.get(0).props.children).toBe('John Doe');
   });
 
   it('should render a snapshot properly', () => {
-    let tree = renderer.create(<UsersList users={users} />).toJSON();
+    const tree = renderer.create(<UsersList users={users} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
