@@ -6,7 +6,7 @@ const AddUser = (props) => {
       <div className="field">
         <label className="label is-large">Username</label>
         <div className="control has-icons-left">
-          <input 
+          <input
             name="username"
             className="input is-large"
             type="text"
@@ -23,7 +23,7 @@ const AddUser = (props) => {
       <div className="field">
         <label className="label is-large">Email</label>
         <div className="control has-icons-left">
-          <input 
+          <input
             name="email"
             className="input is-large"
             type="email"
@@ -37,7 +37,7 @@ const AddUser = (props) => {
           </span>
         </div>
       </div>
-      <input 
+      <input
         type="submit"
         name="submit"
         className="button is-primary is-large is-fullwidth"
