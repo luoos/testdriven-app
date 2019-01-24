@@ -12,6 +12,7 @@ def add_user(username, email):
     db.session.commit()
     return user
 
+
 class TestUserService(BaseTestCase):
     """Tests for the Users Service"""
     def setUp(self):
@@ -53,7 +54,10 @@ class TestUserService(BaseTestCase):
         self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys(self):
-        """Ensure error is thrown if the JSON object does not have a username or an email key"""
+        """
+        Ensure error is thrown if the JSON object
+        does not have a username or an email key
+        """
         response = self.client.post(
             'api/v1/user',
             data=json.dumps({'email': 'greatjohn@doe.com'}),
@@ -73,7 +77,6 @@ class TestUserService(BaseTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn('Invalid payload', data['message'])
         self.assertIn('fail', data['status'])
-
 
     def test_add_user_duplicate_email(self):
         """Ensure error is thrown if the email already exist"""
@@ -136,9 +139,11 @@ class TestUserService(BaseTestCase):
         self.assertIsNone(data['data']['prev'])
         self.assertIsNone(data['data']['next'])
         self.assertEqual('John Doe', data['data']['users'][0]['username'])
-        self.assertEqual('greatjohn@doe.com', data['data']['users'][0]['email'])
+        self.assertEqual('greatjohn@doe.com',
+                         data['data']['users'][0]['email'])
         self.assertEqual('John Snow', data['data']['users'][1]['username'])
-        self.assertEqual('greatjohn@snow.com', data['data']['users'][1]['email'])
+        self.assertEqual('greatjohn@snow.com',
+                         data['data']['users'][1]['email'])
 
     def test_main_no_users(self):
         """Ensure the main route behaves correctly when

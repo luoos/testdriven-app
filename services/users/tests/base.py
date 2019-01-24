@@ -2,6 +2,7 @@ import unittest
 
 from app import create_app, db
 
+
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
         self.app = create_app('testing')
@@ -13,5 +14,3 @@ class BaseTestCase(unittest.TestCase):
         db.session.remove()
         db.drop_all()
         self.app_context.pop()
-
-

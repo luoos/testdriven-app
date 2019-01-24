@@ -9,22 +9,25 @@ if os.environ.get('FLASK_COVERAGE'):
     )
     COV.start()
 
-import sys
-import click
-from app import create_app, db
-from app.models import User
+import sys  # noqa: ignore=E402
+import click  # noqa: ignore=E402
+from app import create_app, db  # noqa: ignore=E402
+from app.models import User  # noqa: ignore=E402
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+
 
 @app.shell_context_processor
 def ctx():
     return {'app': app, 'db': db}
+
 
 @app.cli.command()
 def recreate_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
+
 
 @app.cli.command()
 @click.option('--coverage/--no-coverage', default=False,
@@ -50,6 +53,7 @@ def test(coverage):
         return 0
     else:
         return 1
+
 
 @app.cli.command()
 def seed_db():
