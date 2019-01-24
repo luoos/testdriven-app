@@ -18,7 +18,7 @@ before_script:
 
 script:
   - docker-compose -f docker-compose-dev.yml exec users flask test --coverage
-  - docker-compose -f docker-compose-dev.yml exec users flake8 app
+  - docker-compose -f docker-compose-dev.yml exec users flake8 app tests
 
 after_script:
   - docker-compose -f docker-compose-dev.yml down
