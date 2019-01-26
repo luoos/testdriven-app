@@ -11,6 +11,7 @@ if os.environ.get('FLASK_COVERAGE'):
 
 import sys  # noqa: ignore=E402
 import click  # noqa: ignore=E402
+from flask_migrate import upgrade
 from app import create_app, db  # noqa: ignore=E402
 from app.models import User  # noqa: ignore=E402
 
@@ -61,3 +62,9 @@ def seed_db():
     db.session.add(User(username='John Doe', email='greatjohn@doe.com'))
     db.session.add(User(username='John Snow', email='greatjohn@snow.com'))
     db.session.commit()
+
+@app.cli.command()
+def deploy():
+    """Run deployment tasks"""
+    # migrate database to latest revision
+    upgrade()

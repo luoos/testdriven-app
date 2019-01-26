@@ -18,3 +18,7 @@ export FLASK_ENV=development
 
 flask run
 ```
+
+## Questions
+
+1. Should .dockerignore contain migration scripts?

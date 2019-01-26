@@ -155,7 +155,7 @@ class TestUserService(BaseTestCase):
 
     def test_main_some_users(self):
         add_user('John Doe', 'greatjohn@doe.com')
-        add_user('John Snow', 'greatjohn@doe.com')
+        add_user('John Snow', 'greatjohn@snow.com')
         response = self.client.get('/')
         self.assertEqual(200, response.status_code)
         self.assertIn(b'John Doe', response.data)
