@@ -78,6 +78,24 @@ Now, open http://localhost, you should see a page rendered by React.
 
 A back-end service provides RESTful APIs for React client. Powered by Flask and Postgres.
 
+Way to interact with Postgres:
+
+```SQL
+$ docker-compose -f docker-compose-dev.yml exec users-db psql -U postgres
+
+-- sample:
+postgres=# \c users_dev -- connect to database
+You are now connected to database "users_dev" as user "postgres".
+users_dev=# \dt
+              List of relations
+ Schema |      Name       | Type  |  Owner
+--------+-----------------+-------+----------
+ public | alembic_version | table | postgres
+ public | users           | table | postgres
+(2 rows)
+users_dev=# select * from users;
+```
+
 ### Nginx
 
 Serves as a reverse proxy.
