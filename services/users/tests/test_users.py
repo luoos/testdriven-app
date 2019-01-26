@@ -11,6 +11,11 @@ class TestUserService(BaseTestCase):
         super().setUp()
         self.client = self.app.test_client()
 
+    def get_api_headers(self):
+        return {
+            'Content-Type': 'application/json'
+        }
+
     def test_users(self):
         response = self.client.get('/users/ping')
         data = json.loads(response.data.decode())
@@ -24,7 +29,8 @@ class TestUserService(BaseTestCase):
             'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
-                'email': 'greatjohn@doe.com'
+                'email': 'greatjohn@doe.com',
+                'password': 'password'
             }),
             content_type='application/json'
         )
@@ -52,7 +58,10 @@ class TestUserService(BaseTestCase):
         """
         response = self.client.post(
             'api/v1/user',
-            data=json.dumps({'email': 'greatjohn@doe.com'}),
+            data=json.dumps({
+                'email': 'greatjohn@doe.com',
+                'password': 'password'
+            }),
             content_type='application/json'
         )
         data = json.loads(response.data.decode())
@@ -62,7 +71,10 @@ class TestUserService(BaseTestCase):
 
         response = self.client.post(
             'api/v1/user',
-            data=json.dumps({'username': 'John Doe'}),
+            data=json.dumps({
+                'username': 'John Doe',
+                'password': 'password'
+            }),
             content_type='application/json'
         )
         data = json.loads(response.data.decode())
@@ -76,7 +88,8 @@ class TestUserService(BaseTestCase):
             'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
-                'email': 'greatjohn@doe.com'
+                'email': 'greatjohn@doe.com',
+                'password': 'password'
             }),
             content_type='application/json'
         )
@@ -84,7 +97,8 @@ class TestUserService(BaseTestCase):
             'api/v1/user',
             data=json.dumps({
                 'username': 'John Doe',
-                'email': 'greatjohn@doe.com'
+                'email': 'greatjohn@doe.com',
+                'password': 'password'
             }),
             content_type='application/json'
         )
@@ -96,7 +110,7 @@ class TestUserService(BaseTestCase):
 
     def test_single_user(self):
         """Ensure get single user behaves correctly"""
-        user = add_user('John Doe', 'greatjohn@doe.com')
+        user = add_user('John Doe', 'greatjohn@doe.com', 'password')
         response = self.client.get(f'api/v1/user/{user.id}')
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
@@ -122,8 +136,8 @@ class TestUserService(BaseTestCase):
 
     def test_all_users(self):
         """Ensure get all users behaves correctly"""
-        add_user('John Doe', 'greatjohn@doe.com')
-        add_user('John Snow', 'greatjohn@snow.com')
+        add_user('John Doe', 'greatjohn@doe.com', 'password')
+        add_user('John Snow', 'greatjohn@snow.com', 'password')
         response = self.client.get('api/v1/users')
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
@@ -146,13 +160,31 @@ class TestUserService(BaseTestCase):
         self.assertIn(b'<p>No Users!</p>', response.data)
 
     def test_main_some_users(self):
-        add_user('John Doe', 'greatjohn@doe.com')
-        add_user('John Snow', 'greatjohn@snow.com')
+        add_user('John Doe', 'greatjohn@doe.com', 'password')
+        add_user('John Snow', 'greatjohn@snow.com', 'password')
         response = self.client.get('/')
         self.assertEqual(200, response.status_code)
         self.assertIn(b'John Doe', response.data)
         self.assertIn(b'John Snow', response.data)
         self.assertNotIn(b'<p>No Users!</p>', response.data)
+
+    def test_add_user_invalid_json_keys_no_password(self):
+        """
+        Ensure error is thrown if the JSON object
+        does not have a password key
+        """
+        response = self.client.post(
+            'api/v1/user',
+            data=json.dumps({
+                'username': 'John Doe',
+                'email': 'greatjohn@doe.com'
+            }),
+            content_type='application/json'
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual(response.status_code, 400)
+        self.assertIn('Invalid payload', data['message'])
+        self.assertIn('fail', data['status'])
 
 
 if __name__ == '__main__':
