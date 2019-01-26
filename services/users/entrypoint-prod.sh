@@ -10,14 +10,11 @@ echo "PostgreSQL started"
 
 echo "Waiting for deloyment"
 
-while true; do
-  flask deploy
-  if [[ "$?" == "0" ]]; then
-    break
-  fi
-  echo "Deploy command failed, retrying in 5 secs..."
-  sleep 5
-done
+flask deploy
+if [ $? -ne 0 ]; then
+  echo "Deploy command failed, exit..."
+  exit 1
+fi
 
 echo "Deployed successfully"
 
