@@ -1,4 +1,6 @@
-from datetime import datetime
+import jwt
+from datetime import datetime, timedelta
+from flask import current_app
 from werkzeug.security import generate_password_hash
 
 from . import db
@@ -24,6 +26,35 @@ class User(db.Model):
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
+
+    def encode_auth_token(self):
+        try:
+            payload = {
+                'exp': datetime.utcnow() + timedelta(
+                    days=current_app.config.get('TOKEN_EXPIRATION_DAYS'),
+                    seconds=current_app.config.get('TOKEN_EXPIRATION_SECONDS')
+                ),
+                'iat': datetime.utcnow(),
+                'sub': self.id
+            }
+            return jwt.encode(
+                payload,
+                current_app.config.get('SECRET_KEY'),
+                algorithm='HS256'
+            )
+        except Exception as e:
+            return e
+
+    @staticmethod
+    def decode_auth_token(auth_token):
+        try:
+            payload = jwt.decode(
+                auth_token, current_app.config.get('SECRET_KEY'))
+            return payload['sub']
+        except jwt.ExpiredSignatureError:
+            return 'Signature expired. Please log in again.'
+        except jwt.InvalidTokenError:
+            return 'Invalid token. Please log in again.'
 
     def to_json(self):
         return {
