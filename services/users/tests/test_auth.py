@@ -117,3 +117,38 @@ class TestAuthBlueprint(BaseTestCase):
         self.assertIn(
             'Invalid payload', data['message'])
         self.assertIn('fail', data['status'])
+
+    def test_registered_user_login(self):
+        add_user('test', 'test@test.com', 'password')
+        response = self.client.post(
+            'api/v1/auth/login',
+            data=json.dumps({
+                'email': 'test@test.com',
+                'password': 'password'
+            }),
+            content_type='application/json'
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('success', data['status'])
+        self.assertEqual('Successfully logged in.', data['message'])
+        self.assertTrue(data['auth_token'])
+        self.assertEqual('application/json', response.content_type)
+
+    def test_not_registered_user_login(self):
+        response = self.client.post(
+            'api/v1/auth/login',
+            data=json.dumps({
+                'email': 'test@test.com',
+                'password': 'password'
+            }),
+            content_type='application/json'
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual(404, response.status_code)
+        self.assertEqual('fail', data['status'])
+        self.assertEqual(
+            'User does not exist or wrong password.',
+            data['message']
+        )
+        self.assertEqual('application/json', response.content_type)

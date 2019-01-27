@@ -1,7 +1,7 @@
 import jwt
 from datetime import datetime, timedelta
 from flask import current_app
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from . import db
 
@@ -26,6 +26,9 @@ class User(db.Model):
     @property
     def password(self):
         raise AttributeError('password is not a readable attribute')
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def encode_auth_token(self):
         try:
