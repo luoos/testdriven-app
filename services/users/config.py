@@ -9,7 +9,8 @@ class BaseConfig:
     USERS_PER_PAGE = 20
     DEBUG_TB_ENABLED = False
     DEBUG_TB_INTERCEPT_REDIRECTS = False
-
+    TOKEN_EXPIRATION_DAYS = 30
+    TOKEN_EXPIRATION_SECONDS = 0
 
 class DevelopmentConfig(BaseConfig):
     """Development configuration"""
@@ -21,6 +22,8 @@ class TestingConfig(BaseConfig):
     """Testing configuration"""
     TESTING = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_TEST_URL')
+    TOKEN_EXPIRATION_DAYS = 0
+    TOKEN_EXPIRATION_SECONDS = 3
 
 
 class ProductionConfig(BaseConfig):

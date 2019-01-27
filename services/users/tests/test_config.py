@@ -26,6 +26,8 @@ class TestDevelopmentConfig(unittest.TestCase):
             self.app.config['SQLALCHEMY_DATABASE_URI']
         )
         self.assertTrue(self.app.config['DEBUG_TB_ENABLED'])
+        self.assertEqual(30, self.app.config['TOKEN_EXPIRATION_DAYS'])
+        self.assertEqual(0, self.app.config['TOKEN_EXPIRATION_SECONDS'])
 
 
 class TestTestingConfig(unittest.TestCase):
@@ -49,6 +51,8 @@ class TestTestingConfig(unittest.TestCase):
             self.app.config['SQLALCHEMY_DATABASE_URI']
         )
         self.assertFalse(self.app.config['DEBUG_TB_ENABLED'])
+        self.assertEqual(0, self.app.config['TOKEN_EXPIRATION_DAYS'])
+        self.assertEqual(3, self.app.config['TOKEN_EXPIRATION_SECONDS'])
 
 
 class TestProductionConfig(unittest.TestCase):
@@ -68,6 +72,8 @@ class TestProductionConfig(unittest.TestCase):
         self.assertFalse(self.app.config['TESTING'])
         self.assertFalse(self.app.config['DEBUG'])
         self.assertFalse(self.app.config['DEBUG_TB_ENABLED'])
+        self.assertEqual(30, self.app.config['TOKEN_EXPIRATION_DAYS'])
+        self.assertEqual(0, self.app.config['TOKEN_EXPIRATION_SECONDS'])
 
 
 if __name__ == '__main__':
