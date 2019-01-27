@@ -42,6 +42,7 @@ services:
       - FLASK_CONFIG=development
       - DATABASE_DEV_URL=postgres://postgres:postgres@users-db:5432/users_dev
       - DATABASE_TEST_URL=postgres://postgres:postgres@users-db:5432/users_test
+      - SECRET_KEY=You_may_guess
     depends_on:
       - users-db
 

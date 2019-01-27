@@ -16,8 +16,10 @@ class TestDevelopmentConfig(unittest.TestCase):
         self.app_context.pop()
 
     def test_app_is_development(self):
-        self.assertEqual('Dont fool me, I am smart',
-                         self.app.config['SECRET_KEY'])
+        self.assertEqual(
+            self.app.config['SECRET_KEY'],
+            os.environ.get('SECRET_KEY')
+        )
         self.assertFalse(current_app is None)
         self.assertEqual(
             os.environ.get('DATABASE_DEV_URL'),
@@ -36,8 +38,10 @@ class TestTestingConfig(unittest.TestCase):
         self.app_context.pop()
 
     def test_app_is_testing(self):
-        self.assertEqual('Dont fool me, I am smart',
-                         self.app.config['SECRET_KEY'])
+        self.assertEqual(
+            self.app.config['SECRET_KEY'],
+            os.environ.get('SECRET_KEY')
+        )
         self.assertTrue(self.app.config['TESTING'])
         self.assertFalse(self.app.config['PRESERVE_CONTEXT_ON_EXCEPTION'])
         self.assertEqual(
@@ -57,8 +61,10 @@ class TestProductionConfig(unittest.TestCase):
         self.app_context.pop()
 
     def test_app_is_production(self):
-        self.assertEqual('Dont fool me, I am smart',
-                         self.app.config['SECRET_KEY'])
+        self.assertEqual(
+            self.app.config['SECRET_KEY'],
+            os.environ.get('SECRET_KEY')
+        )
         self.assertFalse(self.app.config['TESTING'])
         self.assertFalse(self.app.config['DEBUG'])
         self.assertFalse(self.app.config['DEBUG_TB_ENABLED'])

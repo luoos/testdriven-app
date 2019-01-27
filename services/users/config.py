@@ -5,7 +5,7 @@ class BaseConfig:
     """Base configuration"""
     TESTING = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'Dont fool me, I am smart'
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     USERS_PER_PAGE = 20
     DEBUG_TB_ENABLED = False
     DEBUG_TB_INTERCEPT_REDIRECTS = False
