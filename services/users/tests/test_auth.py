@@ -208,3 +208,39 @@ class TestAuthBlueprint(BaseTestCase):
             'Invalid token. Please log in again.',
             data['message'])
         self.assertEqual(401, response.status_code)
+
+    def test_user_status(self):
+        add_user('test', 'test@test.com', 'password')
+        resp_login = self.client.post(
+            'api/v1/auth/login',
+            data=json.dumps({
+                'email': 'test@test.com',
+                'password': 'password'
+            }),
+            content_type='application/json'
+        )
+        token = json.loads(resp_login.data.decode())['auth_token']
+        response = self.client.get(
+            'api/v1/auth/status',
+            headers={'Authorization': f'Bearer {token}'}
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual('success', data['status'])
+        self.assertIsNotNone(data['data'])
+        self.assertEqual('test', data['data']['username'])
+        self.assertEqual('test@test.com', data['data']['email'])
+        self.assertTrue(data['data']['active'])
+        self.assertEqual(200, response.status_code)
+
+    def test_invalid_status(self):
+        response = self.client.get(
+            'api/v1/auth/status',
+            headers={'Authorization': 'Bearer invalid'}
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual('fail', data['status'])
+        self.assertEqual(
+            'Invalid token. Please log in again.',
+            data['message']
+        )
+        self.assertEqual(401, response.status_code)
