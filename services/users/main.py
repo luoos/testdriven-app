@@ -59,8 +59,16 @@ def test(coverage):
 @app.cli.command()
 def seed_db():
     """Seeds the database"""
-    db.session.add(User(username='John Doe', email='greatjohn@doe.com'))
-    db.session.add(User(username='John Snow', email='greatjohn@snow.com'))
+    db.session.add(User(
+        username='johndoe',
+        email='greatjohn@doe.com',
+        password='password'
+    ))
+    db.session.add(User(
+        username='John Snow',
+        email='greatjohn@snow.com',
+        password='password'
+    ))
     db.session.commit()
 
 @app.cli.command()
