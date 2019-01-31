@@ -1,0 +1,185 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Form /> Login Form renders a snapshot properly 1`] = `
+<div>
+  <h1
+    className="title is-1"
+  >
+    Log In
+  </h1>
+  <hr />
+  <br />
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="field"
+    >
+      <label
+        className="label is-large"
+      >
+        Email
+      </label>
+      <div
+        className="control has-icons-left"
+      >
+        <input
+          className="input is-large"
+          name="email"
+          placeholder="Enter an email address"
+          required={true}
+          type="email"
+          value=""
+        />
+        <span
+          className="icon is-left"
+        >
+          <i
+            className="fas fa-envelope"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="field"
+    >
+      <label
+        className="label is-large"
+      >
+        Password
+      </label>
+      <div
+        className="control has-icons-left"
+      >
+        <input
+          className="input is-large"
+          name="password"
+          placeholder="Enter a password"
+          required={true}
+          type="password"
+          value=""
+        />
+        <span
+          className="icon is-left"
+        >
+          <i
+            className="fas fa-lock"
+          />
+        </span>
+      </div>
+    </div>
+    <br />
+    <input
+      className="button is-primary is-large is-fullwidth"
+      type="submit"
+      value="submit"
+    />
+  </form>
+</div>
+`;
+
+exports[`<Form /> Register Form renders a snapshot properly 1`] = `
+<div>
+  <h1
+    className="title is-1"
+  >
+    Register
+  </h1>
+  <hr />
+  <br />
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="field"
+    >
+      <label
+        className="label is-large"
+      >
+        Username
+      </label>
+      <div
+        className="control has-icons-left"
+      >
+        <input
+          className="input is-large"
+          name="username"
+          placeholder="Enter a username"
+          required={true}
+          type="text"
+          value=""
+        />
+        <span
+          className="icon is-small is-left"
+        >
+          <i
+            className="fas fa-user"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="field"
+    >
+      <label
+        className="label is-large"
+      >
+        Email
+      </label>
+      <div
+        className="control has-icons-left"
+      >
+        <input
+          className="input is-large"
+          name="email"
+          placeholder="Enter an email address"
+          required={true}
+          type="email"
+          value=""
+        />
+        <span
+          className="icon is-left"
+        >
+          <i
+            className="fas fa-envelope"
+          />
+        </span>
+      </div>
+    </div>
+    <div
+      className="field"
+    >
+      <label
+        className="label is-large"
+      >
+        Password
+      </label>
+      <div
+        className="control has-icons-left"
+      >
+        <input
+          className="input is-large"
+          name="password"
+          placeholder="Enter a password"
+          required={true}
+          type="password"
+          value=""
+        />
+        <span
+          className="icon is-left"
+        >
+          <i
+            className="fas fa-lock"
+          />
+        </span>
+      </div>
+    </div>
+    <br />
+    <input
+      className="button is-primary is-large is-fullwidth"
+      type="submit"
+      value="submit"
+    />
+  </form>
+</div>
+`;

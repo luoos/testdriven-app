@@ -7,12 +7,18 @@ import UsersList from './components/UsersList/UsersList';
 import AddUser from './components/AddUser/AddUser';
 import About from './components/About/About';
 import NavBar from './components/NavBar/NavBar';
+import Form from './components/Form/Form';
 
 class App extends React.Component {
   state = {
     users: [],
     username: '',
-    email: ''
+    email: '',
+    formData: {
+      username: '',
+      email: '',
+      password: ''
+    }
   }
 
   componentDidMount() {
@@ -57,6 +63,20 @@ class App extends React.Component {
                 <Switch>
 
                   <Route exact path='/about' component={About}/>
+
+                  <Route exact path='/register' render={() => (
+                    <Form
+                      formType={'Register'}
+                      formData={this.state.formData}
+                    />
+                  )} />
+
+                  <Route exact path='/login' render={() => (
+                    <Form
+                      formType={'Login'}
+                      formData={this.state.formData}
+                    />
+                  )} />
 
                   <Route exact path='/' render={() => (
                     <>
