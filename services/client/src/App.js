@@ -6,6 +6,7 @@ import './App.css';
 import UsersList from './components/UsersList/UsersList';
 import AddUser from './components/AddUser/AddUser';
 import About from './components/About/About';
+import NavBar from './components/NavBar/NavBar';
 
 class App extends React.Component {
   state = {
@@ -46,34 +47,37 @@ class App extends React.Component {
 
   render() {
     return (
-      <section className="section">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-half">
-              <br/>
-              <Switch>
+      <>
+        <NavBar />
+        <section className="section">
+          <div className="container">
+            <div className="columns">
+              <div className="column is-half">
+                <br/>
+                <Switch>
 
-                <Route exact path='/about' component={About}/>
+                  <Route exact path='/about' component={About}/>
 
-                <Route exact path='/' render={() => (
-                  <>
-                    <h1 className="title is-1">All Users</h1>
-                    <hr/><br/>
-                    <AddUser
-                      username={this.state.username}
-                      email={this.state.email}
-                      submitForm={this.addUser}
-                      handleChange={this.handleChange}/>
-                    <br/><br/>
-                    <UsersList users={this.state.users} />
-                  </>
-                )} />
+                  <Route exact path='/' render={() => (
+                    <>
+                      <h1 className="title is-1">All Users</h1>
+                      <hr/><br/>
+                      <AddUser
+                        username={this.state.username}
+                        email={this.state.email}
+                        submitForm={this.addUser}
+                        handleChange={this.handleChange}/>
+                      <br/><br/>
+                      <UsersList users={this.state.users} />
+                    </>
+                  )} />
 
-              </Switch>
+                </Switch>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </>
     );
   }
 }
