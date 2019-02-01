@@ -24,6 +24,7 @@ exports[`<Form /> Login Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
+          autoComplete="email"
           className="input is-large"
           name="email"
           placeholder="Enter an email address"
@@ -52,6 +53,7 @@ exports[`<Form /> Login Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
+          autoComplete="current-password"
           className="input is-large"
           name="password"
           placeholder="Enter a password"
@@ -130,6 +132,7 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
+          autoComplete="email"
           className="input is-large"
           name="email"
           placeholder="Enter an email address"
@@ -158,6 +161,7 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
+          autoComplete="current-password"
           className="input is-large"
           name="password"
           placeholder="Enter a password"

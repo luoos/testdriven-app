@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import axios from './axios-users';
 import './App.css';
@@ -7,6 +7,7 @@ import UsersList from './components/UsersList/UsersList';
 import About from './components/About/About';
 import NavBar from './components/NavBar/NavBar';
 import Form from './components/Form/Form';
+import Logout from './components/Logout/Logout';
 
 class App extends React.Component {
   state = {
@@ -81,6 +82,11 @@ class App extends React.Component {
     this.setState(obj);
   }
 
+  logUserOut = () => {
+    localStorage.removeItem('authToken');
+    this.setState({authToken: null});
+  }
+
   render() {
     return (
       <>
@@ -112,6 +118,10 @@ class App extends React.Component {
                     />
                   )} />
 
+                  <Route exact path='/logout' render={() => (
+                    <Logout logUserOut={() => this.logUserOut()} />
+                  )} />
+
                   <Route exact path='/' render={() => (
                     <>
                       <h1 className="title is-1">All Users</h1>
@@ -130,4 +140,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

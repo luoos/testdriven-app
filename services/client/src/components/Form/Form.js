@@ -38,6 +38,7 @@ const Form = (props) => {
               className="input is-large"
               type="email"
               placeholder="Enter an email address"
+              autoComplete="email"
               required
               value={props.formData.email}
               onChange={props.handleFormValueChange}
@@ -55,6 +56,7 @@ const Form = (props) => {
               className="input is-large"
               type="password"
               placeholder="Enter a password"
+              autoComplete="current-password"
               required
               value={props.formData.password}
               onChange={props.handleFormValueChange}
