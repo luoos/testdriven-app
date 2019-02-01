@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NavBar = () => (
+const NavBar = (props) => (
   <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
     <section className="container">
       <div className="navbar-brand">
@@ -26,9 +26,13 @@ const NavBar = () => (
           <Link to="/status" className="navbar-item">User Status</Link>
         </div>
         <div className="navbar-end">
-          <Link to="/register" className="navbar-item">Register</Link>
-          <Link to="/login" className="navbar-item">Log In</Link>
-          <Link to="/logout" className="navbar-item">Log Out</Link>
+          {props.isAuthenticated ?
+            <Link to="/logout" className="navbar-item">Log Out</Link> :
+            <>
+              <Link to="/register" className="navbar-item">Register</Link>
+              <Link to="/login" className="navbar-item">Log In</Link>
+            </>
+          }
         </div>
       </div>
     </section>

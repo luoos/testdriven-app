@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import axios from './axios-users';
 import './App.css';
 import UsersList from './components/UsersList/UsersList';
-import AddUser from './components/AddUser/AddUser';
 import About from './components/About/About';
 import NavBar from './components/NavBar/NavBar';
 import Form from './components/Form/Form';
@@ -18,25 +17,18 @@ class App extends React.Component {
       username: '',
       email: '',
       password: ''
-    }
+    },
+    authToken: null,
   }
 
   componentDidMount() {
     this.getUsers();
-  }
-
-  addUser = (event) => {
-    event.preventDefault();
-    const data = {
-      username: this.state.username,
-      email: this.state.email
-    }
-    axios.post('/api/v1/user', data)
-      .then((res) => {
-        this.getUsers();
-        this.setState({ username: '', email: ''})
+    const token = localStorage.getItem('authToken');
+    if (token !== null) {
+      this.setState({
+        authToken: token
       })
-      .catch((err) => { console.log(err); })
+    }
   }
 
   clearFormState = () => {
@@ -74,6 +66,11 @@ class App extends React.Component {
         console.log(res.data);
         this.clearFormState();
         localStorage.setItem('authToken', res.data.auth_token);
+        this.setState({
+          authToken: res.data.auth_token
+        });
+        this.props.history.replace('/');
+        this.getUsers();
       }))
       .catch(err => console.log(err))
   };
@@ -87,7 +84,7 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <NavBar />
+        <NavBar isAuthenticated={this.state.authToken !== null} />
         <section className="section">
           <div className="container">
             <div className="columns">
@@ -119,12 +116,6 @@ class App extends React.Component {
                     <>
                       <h1 className="title is-1">All Users</h1>
                       <hr/><br/>
-                      <AddUser
-                        username={this.state.username}
-                        email={this.state.email}
-                        submitForm={this.addUser}
-                        handleChange={this.handleChange}/>
-                      <br/><br/>
                       <UsersList users={this.state.users} />
                     </>
                   )} />
