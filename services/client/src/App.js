@@ -39,6 +39,14 @@ class App extends React.Component {
       .catch((err) => { console.log(err); })
   }
 
+  clearFormState = () => {
+    this.setState({
+      formData: { username: '', email: '', password: ''},
+      username: '',
+      email: ''
+    })
+  }
+
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -49,6 +57,31 @@ class App extends React.Component {
     axios.get('/api/v1/users')
       .then((res) => { this.setState({ users: res.data.data.users })})
       .catch((err) => { console.log(err)})
+  }
+
+  handleUserFormSubmit = (event) => {
+    event.preventDefault();
+    const formType = window.location.href.split('/').reverse()[0];
+    let data = {
+      email: this.state.formData.email,
+      password: this.state.formData.password
+    };
+    if (formType === 'register') {
+      data.username = this.state.formData.username;
+    }
+    axios.post(`/api/v1/auth/${formType}`, data)
+      .then((res => {
+        console.log(res.data);
+        this.clearFormState();
+        localStorage.setItem('authToken', res.data.auth_token);
+      }))
+      .catch(err => console.log(err))
+  };
+
+  handleFormValueChange = (event) => {
+    const obj = this.state.formData;
+    obj[event.target.name] = event.target.value;
+    this.setState(obj);
   }
 
   render() {
@@ -68,6 +101,8 @@ class App extends React.Component {
                     <Form
                       formType={'Register'}
                       formData={this.state.formData}
+                      handleUserFormSubmit={this.handleUserFormSubmit}
+                      handleFormValueChange={this.handleFormValueChange}
                     />
                   )} />
 
@@ -75,6 +110,8 @@ class App extends React.Component {
                     <Form
                       formType={'Login'}
                       formData={this.state.formData}
+                      handleUserFormSubmit={this.handleUserFormSubmit}
+                      handleFormValueChange={this.handleFormValueChange}
                     />
                   )} />
 

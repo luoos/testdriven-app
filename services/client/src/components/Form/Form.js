@@ -22,7 +22,7 @@ const Form = (props) => {
                 placeholder="Enter a username"
                 required
                 value={props.formData.username}
-                onChange={props.handleFormChange}
+                onChange={props.handleFormValueChange}
               />
               <span className="icon is-small is-left">
                 <i className="fas fa-user"></i>
@@ -40,7 +40,7 @@ const Form = (props) => {
               placeholder="Enter an email address"
               required
               value={props.formData.email}
-              onChange={props.handleFormChange}
+              onChange={props.handleFormValueChange}
             />
             <span className="icon is-left">
               <i className="fas fa-envelope"></i>
@@ -57,7 +57,7 @@ const Form = (props) => {
               placeholder="Enter a password"
               required
               value={props.formData.password}
-              onChange={props.handleFormChange}
+              onChange={props.handleFormValueChange}
             />
             <span className="icon is-left">
               <i className="fas fa-lock"></i>
