@@ -54,10 +54,11 @@ class TestUserModel(BaseTestCase):
 
     def test_encode_auth_token(self):
         user = add_user('testuser', 'test@test.com', 'password')
-        auth_token = user.encode_auth_token()
+        auth_token, exp = user.encode_auth_token()
         self.assertTrue(isinstance(auth_token, bytes))
+        self.assertTrue(isinstance(exp, float))
 
     def test_decode_auth_token(self):
         user = add_user('testuser', 'test@test.com', 'password')
-        auth_token = user.encode_auth_token()
+        auth_token, _ = user.encode_auth_token()
         self.assertEqual(user.id, User.decode_auth_token(auth_token))

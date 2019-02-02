@@ -31,10 +31,11 @@ def register_user():
             db.session.add(new_user)
             db.session.commit()
             # generate auth token
-            auth_token = new_user.encode_auth_token()
+            auth_token, exp = new_user.encode_auth_token()
             response_object['status'] = 'success'
             response_object['message'] = 'Successfully registered.'
             response_object['auth_token'] = auth_token.decode()
+            response_object['exp'] = exp
             response_object['user_id'] = new_user.id
             return jsonify(response_object), 201
         else:
@@ -59,11 +60,12 @@ def login_user():
     try:
         user = User.query.filter_by(email=email).first()
         if user and user.verify_password(password):
-            auth_token = user.encode_auth_token()
+            auth_token, exp = user.encode_auth_token()
             if auth_token:
                 response_object['status'] = 'success'
                 response_object['message'] = 'Successfully logged in.'
                 response_object['auth_token'] = auth_token.decode()
+                response_object['exp'] = exp
                 response_object['user_id'] = user.id
                 return jsonify(response_object), 200
             else:

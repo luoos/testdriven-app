@@ -1,5 +1,6 @@
 import json
 
+from datetime import datetime
 from flask import current_app
 from tests.base import BaseTestCase
 from tests.utils import add_user
@@ -26,6 +27,7 @@ class TestAuthBlueprint(BaseTestCase):
         self.assertEqual('Successfully registered.', data['message'])
         self.assertEqual(1, data['user_id'])
         self.assertTrue(data['auth_token'])
+        self.assertTrue(data['exp'] > datetime.utcnow().timestamp())
         self.assertEqual('application/json', response.content_type)
         self.assertEqual(201, response.status_code)
 
@@ -136,6 +138,7 @@ class TestAuthBlueprint(BaseTestCase):
         self.assertEqual('Successfully logged in.', data['message'])
         self.assertEqual(1, data['user_id'])
         self.assertTrue(data['auth_token'])
+        self.assertTrue(data['exp'] > datetime.utcnow().timestamp())
         self.assertEqual('application/json', response.content_type)
 
     def test_not_registered_user_login(self):

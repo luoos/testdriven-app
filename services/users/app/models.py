@@ -31,22 +31,21 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
     def encode_auth_token(self):
-        try:
-            payload = {
-                'exp': datetime.utcnow() + timedelta(
-                    days=current_app.config.get('TOKEN_EXPIRATION_DAYS'),
-                    seconds=current_app.config.get('TOKEN_EXPIRATION_SECONDS')
-                ),
-                'iat': datetime.utcnow(),
-                'sub': self.id
-            }
-            return jwt.encode(
-                payload,
-                current_app.config.get('SECRET_KEY'),
-                algorithm='HS256'
-            )
-        except Exception as e:
-            return e
+        payload = {
+            'exp': datetime.utcnow() + timedelta(
+                days=current_app.config.get('TOKEN_EXPIRATION_DAYS'),
+                seconds=current_app.config.get('TOKEN_EXPIRATION_SECONDS')
+            ),
+            'iat': datetime.utcnow(),
+            'sub': self.id
+        }
+        exp = payload['exp'].timestamp()
+        token = jwt.encode(
+            payload,
+            current_app.config.get('SECRET_KEY'),
+            algorithm='HS256'
+        )
+        return token, exp
 
     @staticmethod
     def decode_auth_token(auth_token):
