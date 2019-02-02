@@ -45,8 +45,9 @@ export const auth = (email, password, isSignup, username) => {
     axios.post(url, data)
       .then((res => {
         console.log(res.data);
-        dispatch(authSuccess(res.data.auth_token, 1)) // TODO: use real userId
+        dispatch(authSuccess(res.data.auth_token, res.data.user_id))
         localStorage.setItem('authToken', res.data.auth_token);
+        localStorage.setItem('userId', res.data.user_id);
       }))
       .catch(err => console.log(err))
   }
@@ -55,11 +56,12 @@ export const auth = (email, password, isSignup, username) => {
 export const authCheckState = () => {
   return dispatch => {
     const authToken = localStorage.getItem('authToken');
+    const userId = localStorage.getItem('userId');
     if (!authToken) {
       dispatch(authLogout());
     } else {
       // TODO: check expiration
-      dispatch(authSuccess(authToken, 1));
+      dispatch(authSuccess(authToken, userId));
     }
   }
 }
