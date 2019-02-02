@@ -68,6 +68,8 @@ $ docker-compose -f docker-compose-dev.yml exec users flask test --coverage
 
 # Run React client test, make sure all test cases pass
 $ docker-compose -f docker-compose-dev.yml exec client npm test
+# Verbose
+$ docker-compose -f docker-compose-dev.yml exec client npm test -- --verbose
 ```
 
 Now, open http://localhost, you should see a page rendered by React.
