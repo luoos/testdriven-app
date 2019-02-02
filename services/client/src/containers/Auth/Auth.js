@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { updateObject } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
@@ -13,10 +14,6 @@ class Auth extends React.Component {
       email: '',
       password: ''
     }
-  }
-
-  componentDidMount() {
-
   }
 
   handleFormValueChange = (event) => {
@@ -40,6 +37,9 @@ class Auth extends React.Component {
   }
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to={this.props.authRedirectPath} />;
+    }
     return (
       <Form
         formType={this.props.formType}
@@ -51,6 +51,13 @@ class Auth extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignup, username) => dispatch(
@@ -59,4 +66,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
