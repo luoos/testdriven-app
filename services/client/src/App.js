@@ -9,6 +9,7 @@ import About from './components/About/About';
 import NavBar from './components/NavBar/NavBar';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
+import * as actions from './store/actions/index';
 
 class App extends React.Component {
   state = {
@@ -19,6 +20,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getUsers();
+    this.props.onTryAutoLogin();
   }
 
   getUsers = () => {
@@ -74,4 +76,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoLogin: () => dispatch(actions.authCheckState())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

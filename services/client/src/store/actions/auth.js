@@ -51,3 +51,15 @@ export const auth = (email, password, isSignup, username) => {
       .catch(err => console.log(err))
   }
 }
+
+export const authCheckState = () => {
+  return dispatch => {
+    const authToken = localStorage.getItem('authToken');
+    if (!authToken) {
+      dispatch(authLogout());
+    } else {
+      // TODO: check expiration
+      dispatch(authSuccess(authToken, 1));
+    }
+  }
+}
