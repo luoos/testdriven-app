@@ -24,6 +24,7 @@ class TestAuthBlueprint(BaseTestCase):
         data = json.loads(response.data.decode())
         self.assertEqual('success', data['status'])
         self.assertEqual('Successfully registered.', data['message'])
+        self.assertEqual(1, data['user_id'])
         self.assertTrue(data['auth_token'])
         self.assertEqual('application/json', response.content_type)
         self.assertEqual(201, response.status_code)
@@ -133,6 +134,7 @@ class TestAuthBlueprint(BaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('success', data['status'])
         self.assertEqual('Successfully logged in.', data['message'])
+        self.assertEqual(1, data['user_id'])
         self.assertTrue(data['auth_token'])
         self.assertEqual('application/json', response.content_type)
 
