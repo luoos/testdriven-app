@@ -6,9 +6,9 @@ import axios from './axios-users';
 import './App.css';
 import UsersList from './components/UsersList/UsersList';
 import About from './components/About/About';
-import NavBar from './components/NavBar/NavBar';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
+import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions/index';
 
 class App extends React.Component {
@@ -31,8 +31,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <>
-        <NavBar isAuthenticated={this.props.isAuthenticated} />
+      <Layout>
         <section className="section">
           <div className="container">
             <div className="columns">
@@ -65,7 +64,7 @@ class App extends React.Component {
             </div>
           </div>
         </section>
-      </>
+      </Layout>
     );
   }
 }
