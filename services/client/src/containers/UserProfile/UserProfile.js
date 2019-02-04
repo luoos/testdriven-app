@@ -11,7 +11,9 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserStatus();
+    if (localStorage.authToken) { // TODO: this is a work around
+      this.getUserStatus();
+    }
   }
 
   getUserStatus = () => {
