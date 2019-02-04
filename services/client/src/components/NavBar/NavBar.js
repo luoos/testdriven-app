@@ -23,11 +23,13 @@ const NavBar = (props) => (
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Home</Link>
           <Link to="/about" className="navbar-item">About</Link>
-          <Link to="/status" className="navbar-item">User Status</Link>
         </div>
         <div className="navbar-end">
           {props.isAuthenticated ?
-            <Link to="/logout" className="navbar-item">Log Out</Link> :
+            <>
+              <Link to="/profile" className="navbar-item">Profile</Link>
+              <Link to="/logout" className="navbar-item">Log Out</Link>
+            </> :
             <>
               <Link to="/register" className="navbar-item">Register</Link>
               <Link to="/login" className="navbar-item">Log In</Link>

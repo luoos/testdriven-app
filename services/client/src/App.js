@@ -10,6 +10,7 @@ import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions/index';
+import UserProfile from './containers/UserProfile/UserProfile';
 
 class App extends React.Component {
   state = {
@@ -50,6 +51,10 @@ class App extends React.Component {
                   )} />
 
                   <Route exact path='/logout' component={Logout}/>
+
+                  <Route exact path='/profile' render={() => (
+                    <UserProfile isAuthenticated={this.props.isAuthenticated} />
+                  )}/>
 
                   <Route exact path='/' render={() => (
                     <>
