@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavBar = (props) => (
-  <nav className="navbar is-dark" role="navigation" aria-label="main navigation">
-    <section className="container">
+  <nav className="navbar is-dark has-shadow" role="navigation" aria-label="main navigation">
+    <div className="container">
       <div className="navbar-brand">
         <strong className="navbar-item">TestDriven.io</strong>
         <span
@@ -25,19 +25,28 @@ const NavBar = (props) => (
           <Link to="/about" className="navbar-item">About</Link>
         </div>
         <div className="navbar-end">
-          {props.isAuthenticated ?
-            <>
-              <Link to="/profile" className="navbar-item">Profile</Link>
-              <Link to="/logout" className="navbar-item">Log Out</Link>
-            </> :
-            <>
-              <Link to="/register" className="navbar-item">Register</Link>
-              <Link to="/login" className="navbar-item">Log In</Link>
-            </>
-          }
+            {props.isAuthenticated ?
+              <div className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link">
+                  More
+                </a>
+                <div className="navbar-dropdown">
+                  <Link to="/profile" className="navbar-item">Profile</Link>
+                  <hr class="navbar-divider"></hr>
+                  <Link to="/logout" className="navbar-item">Log Out</Link>
+                </div>
+              </div>
+              :
+              <div className="navbar-item">
+                <div className="buttons">
+                  <Link to="/register" className="button is-success is-outlined">Register</Link>
+                  <Link to="/login" className="button is-white">Log In</Link>
+                </div>
+              </div>
+            }
         </div>
       </div>
-    </section>
+    </div>
   </nav>
 );
 

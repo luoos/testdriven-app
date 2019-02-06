@@ -3,10 +3,10 @@
 exports[`<NavBar /> NavBar renders a snapshot properly 1`] = `
 <nav
   aria-label="main navigation"
-  className="navbar is-dark"
+  className="navbar is-dark has-shadow"
   role="navigation"
 >
-  <section
+  <div
     className="container"
   >
     <div
@@ -50,22 +50,30 @@ exports[`<NavBar /> NavBar renders a snapshot properly 1`] = `
       <div
         className="navbar-end"
       >
-        <a
+        <div
           className="navbar-item"
-          href="/register"
-          onClick={[Function]}
         >
-          Register
-        </a>
-        <a
-          className="navbar-item"
-          href="/login"
-          onClick={[Function]}
-        >
-          Log In
-        </a>
+          <div
+            className="buttons"
+          >
+            <a
+              className="button is-success is-outlined"
+              href="/register"
+              onClick={[Function]}
+            >
+              Register
+            </a>
+            <a
+              className="button is-white"
+              href="/login"
+              onClick={[Function]}
+            >
+              Log In
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </nav>
 `;
