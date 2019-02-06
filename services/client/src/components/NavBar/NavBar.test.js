@@ -21,7 +21,7 @@ describe('<NavBar />', () => {
   it('Three navbar-start elements', () => {
     const element = wrapper.find('.navbar-start');
     expect(element.length).toBe(1);
-    expect(element.get(0).props.children.length).toBe(3);
+    expect(element.get(0).props.children.length).toBe(2);
   });
 
   it('NavBar renders a snapshot properly', () => {

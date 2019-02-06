@@ -1,16 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UsersList /> should render a snapshot properly 1`] = `
-<div>
-  <h4
-    className="box title is-4"
+Array [
+  <h1
+    className="title is-1"
   >
-    John Doe
-  </h4>
-  <h4
-    className="box title is-4"
+    All Users
+  </h1>,
+  <hr />,
+  <br />,
+  <table
+    className="table is-hoverable is-fullwidth"
   >
-    John Snow
-  </h4>
-</div>
+    <thead>
+      <tr>
+        <th>
+          ID
+        </th>
+        <th>
+          Email
+        </th>
+        <th>
+          Username
+        </th>
+        <th>
+          Active
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          greatjohn@doe.com
+        </td>
+        <td>
+          John Doe
+        </td>
+        <td>
+          true
+        </td>
+      </tr>
+      <tr>
+        <td>
+          2
+        </td>
+        <td>
+          greatjohn@snow.com
+        </td>
+        <td>
+          John Snow
+        </td>
+        <td>
+          true
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
 `;

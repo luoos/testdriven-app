@@ -7,7 +7,8 @@ class UserProfile extends React.Component {
   state = {
     email: '',
     id: '',
-    username: ''
+    username: '',
+    active: '',
   }
 
   componentDidMount() {
@@ -31,7 +32,8 @@ class UserProfile extends React.Component {
         this.setState({
           email: res.data.data.email,
           id: res.data.data.id,
-          username: res.data.data.username
+          username: res.data.data.username,
+          active: String(res.data.data.active)
         })
       })
       .catch(error => { console.log(error) })
@@ -49,6 +51,7 @@ class UserProfile extends React.Component {
           <li><strong>User ID:</strong> {this.state.id}</li>
           <li><strong>Email:</strong> {this.state.email}</li>
           <li><strong>Username:</strong> {this.state.username}</li>
+          <li><strong>Active:</strong> {this.state.active}</li>
         </ul>
       </>
     )

@@ -57,11 +57,7 @@ class App extends React.Component {
                   )}/>
 
                   <Route exact path='/' render={() => (
-                    <>
-                      <h1 className="title is-1">All Users</h1>
-                      <hr/><br/>
-                      <UsersList users={this.state.users} />
-                    </>
+                    <UsersList users={this.state.users} />
                   )} />
 
                 </Switch>
