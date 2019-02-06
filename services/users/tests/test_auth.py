@@ -2,6 +2,9 @@ import json
 
 from datetime import datetime
 from flask import current_app
+
+from app import db
+from app.models import User
 from tests.base import BaseTestCase
 from tests.utils import add_user
 
@@ -249,3 +252,27 @@ class TestAuthBlueprint(BaseTestCase):
             data['message']
         )
         self.assertEqual(401, response.status_code)
+
+    def test_invalid_logout_inactive(self):
+        add_user('test', 'test@test.com', 'password')
+        user = User.query.filter_by(email='test@test.com').first()
+        user.active = False
+        db.session.add(user)
+        db.session.commit()
+        resp_login = self.client.post(
+            '/api/v1/auth/login',
+            data=json.dumps({
+                'email': 'test@test.com',
+                'password': 'password'
+            }),
+            content_type='application/json'
+        )
+        token = json.loads(resp_login.data.decode())['auth_token']
+        response = self.client.get(
+            '/api/v1/auth/logout',
+            headers={'Authorization': f'Bearer {token}'}
+        )
+        data = json.loads(response.data.decode())
+        self.assertEqual(401, response.status_code)
+        self.assertEqual('fail', data['status'])
+        self.assertEqual('Provide a valid auth token.', data['message'])
