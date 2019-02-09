@@ -53,7 +53,7 @@ def test(coverage):
     if result.wasSuccessful():
         return 0
     else:
-        return 1
+        sys.exit(result)
 
 
 @app.cli.command()
