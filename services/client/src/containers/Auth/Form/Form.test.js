@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 
-import Form from './Form';
+import { Form } from './Form';
 
 const testData = [
   {
@@ -13,8 +13,6 @@ const testData = [
       email: '',
       password: ''
     },
-    handleUserFormSubmit: jest.fn(),
-    handleFormValueChange: jest.fn(),
   },
   {
     formType: 'Login',
@@ -23,15 +21,13 @@ const testData = [
       email: '',
       password: ''
     },
-    handleUserFormSubmit: jest.fn(),
-    handleFormValueChange: jest.fn(),
   }
 ]
 
 describe('<Form />', () => {
 
   testData.forEach((el) => {
-    const component = <Form {...el} />;
+    const component = <Form formType={el.formType}/>;
     it(`${el.formType} Form renders properly`, () => {
       const wrapper = shallow(component);
       const h1 = wrapper.find('h1');
@@ -50,14 +46,15 @@ describe('<Form />', () => {
 
     it(`${el.formType} Form submits the form properly`, () => {
       const wrapper = shallow(component);
+      wrapper.instance().handleUserFormSubmit = jest.fn()
+      wrapper.update()
       const input = wrapper.find('input[type="email"]');
-      expect(el.handleUserFormSubmit).toHaveBeenCalledTimes(0);
-      expect(el.handleFormValueChange).toHaveBeenCalledTimes(0);
-      input.simulate('change');
-      expect(el.handleFormValueChange).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledTimes(0);
+      input.simulate('change',
+        {target: {name: 'email', value: 'test@test.com'} });
       wrapper.find('form').simulate('submit', el.formData)
-      expect(el.handleUserFormSubmit).toHaveBeenCalledWith(el.formData);
-      expect(el.handleUserFormSubmit).toHaveBeenCalledTimes(1);
+      expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledWith(el.formData);
+      expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledTimes(1);
     })
   })
 

@@ -32,7 +32,7 @@ const NavBar = (props) => (
                 </a>
                 <div className="navbar-dropdown">
                   <Link to="/profile" className="navbar-item">Profile</Link>
-                  <hr class="navbar-divider"></hr>
+                  <hr className="navbar-divider"></hr>
                   <Link to="/logout" className="navbar-item">Log Out</Link>
                 </div>
               </div>
