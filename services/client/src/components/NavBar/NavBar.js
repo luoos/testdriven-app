@@ -27,9 +27,9 @@ const NavBar = (props) => (
         <div className="navbar-end">
             {props.isAuthenticated ?
               <div className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link">
+                <div className="navbar-link">
                   More
-                </a>
+                </div>
                 <div className="navbar-dropdown">
                   <Link to="/profile" className="navbar-item">Profile</Link>
                   <hr className="navbar-divider"></hr>
