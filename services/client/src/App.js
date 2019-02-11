@@ -17,9 +17,12 @@ class App extends React.Component {
     users: [],
   }
 
+  componentWillMount() {
+    this.props.onTryAutoLogin();
+  }
+
   componentDidMount() {
     this.getUsers();
-    this.props.onTryAutoLogin();
   }
 
   getUsers = () => {
