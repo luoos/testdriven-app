@@ -1,0 +1,6 @@
+{
+    "name": "testdriven-app",
+    "dependencies": {
+        "cypress": "^3.1.5"
+    }
+}
