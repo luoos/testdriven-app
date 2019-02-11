@@ -15,8 +15,6 @@ import UserProfile from './containers/UserProfile/UserProfile';
 class App extends React.Component {
   state = {
     users: [],
-    username: '',
-    email: '',
   }
 
   componentDidMount() {
