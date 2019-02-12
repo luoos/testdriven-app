@@ -24,13 +24,11 @@ exports[`<Form /> Login Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
-          autoComplete="email"
           className="input is-large"
           name="email"
           onChange={[Function]}
           placeholder="Enter an email address"
           required={true}
-          type="email"
           value=""
         />
         <span
@@ -54,13 +52,11 @@ exports[`<Form /> Login Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
-          autoComplete="current-password"
           className="input is-large"
           name="password"
           onChange={[Function]}
           placeholder="Enter a password"
           required={true}
-          type="password"
           value=""
         />
         <span
@@ -112,11 +108,10 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
           onChange={[Function]}
           placeholder="Enter a username"
           required={true}
-          type="text"
           value=""
         />
         <span
-          className="icon is-small is-left"
+          className="icon is-left"
         >
           <i
             className="fas fa-user"
@@ -136,13 +131,11 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
-          autoComplete="email"
           className="input is-large"
           name="email"
           onChange={[Function]}
           placeholder="Enter an email address"
           required={true}
-          type="email"
           value=""
         />
         <span
@@ -166,13 +159,11 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
         className="control has-icons-left"
       >
         <input
-          autoComplete="current-password"
           className="input is-large"
           name="password"
           onChange={[Function]}
           placeholder="Enter a password"
           required={true}
-          type="password"
           value=""
         />
         <span

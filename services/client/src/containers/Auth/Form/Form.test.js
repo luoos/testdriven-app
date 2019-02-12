@@ -33,10 +33,8 @@ describe('<Form />', () => {
       const h1 = wrapper.find('h1');
       expect(h1.length).toBe(1);
       expect(h1.get(0).props.children).toBe(el.title);
-      const formGroup = wrapper.find('.control');
-      expect(formGroup.length).toBe(Object.keys(el.formData).length);
-      expect(formGroup.get(0).props.children[0].props.name).toBe(Object.keys(el.formData)[0]);
-      expect(formGroup.get(0).props.children[0].props.value).toBe('');
+      const formInput = wrapper.find('Input');
+      expect(formInput.length).toBe(Object.keys(el.formData).length);
     });
 
     it(`${el.formType} Form renders a snapshot properly`, () => {
@@ -48,7 +46,7 @@ describe('<Form />', () => {
       const wrapper = shallow(component);
       wrapper.instance().handleUserFormSubmit = jest.fn()
       wrapper.update()
-      const input = wrapper.find('input[type="email"]');
+      const input = wrapper.find('Input[type="email"]');
       expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledTimes(0);
       input.simulate('change',
         {target: {name: 'email', value: 'test@test.com'} });

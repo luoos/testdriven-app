@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { updateObject } from '../../../shared/utility';
 import * as actions from '../../../store/actions/index';
 
+import Input from '../../../components/UI/Input/Input';
+
 class Form extends React.Component {
   state = {
     formData: {
@@ -61,60 +63,40 @@ class Form extends React.Component {
         <hr/><br/>
         <form onSubmit={(event) => this.handleUserFormSubmit(event)}>
           {this.props.formType === 'Register' &&
-            <div className="field">
-              <label className="label is-large">Username</label>
-              <div className="control has-icons-left">
-                <input
-                  name="username"
-                  className="input is-large"
-                  type="text"
-                  placeholder="Enter a username"
-                  required
-                  value={this.state.formData.username}
-                  onChange={this.handleFormValueChange}
-                />
-                <span className="icon is-small is-left">
-                  <i className="fas fa-user"></i>
-                </span>
-              </div>
-            </div>
+            <Input
+              label="Username"
+              name="username"
+              type="text"
+              size="large"
+              icon="user"
+              placeholder="Enter a username"
+              required={true}
+              value={this.state.formData.username}
+              handleChange={this.handleFormValueChange}
+            />
           }
-          <div className="field">
-            <label className="label is-large">Email</label>
-            <div className="control has-icons-left">
-              <input
-                name="email"
-                className="input is-large"
-                type="email"
-                placeholder="Enter an email address"
-                autoComplete="email"
-                required
-                value={this.state.formData.email}
-                onChange={this.handleFormValueChange}
-              />
-              <span className="icon is-left">
-                <i className="fas fa-envelope"></i>
-              </span>
-            </div>
-          </div>
-          <div className="field">
-            <label className="label is-large">Password</label>
-            <div className="control has-icons-left">
-              <input
-                name="password"
-                className="input is-large"
-                type="password"
-                placeholder="Enter a password"
-                autoComplete="current-password"
-                required
-                value={this.state.formData.password}
-                onChange={this.handleFormValueChange}
-              />
-              <span className="icon is-left">
-                <i className="fas fa-lock"></i>
-              </span>
-            </div>
-          </div>
+          <Input
+            label="Email"
+            name="email"
+            type="email"
+            size="large"
+            icon="envelope"
+            placeholder="Enter an email address"
+            required={true}
+            value={this.state.formData.email}
+            handleChange={this.handleFormValueChange}
+          />
+          <Input
+            label="Password"
+            name="password"
+            type="password"
+            size="large"
+            icon="lock"
+            placeholder="Enter a password"
+            required={true}
+            value={this.state.formData.password}
+            handleChange={this.handleFormValueChange}
+          />
           <br/>
           <input
             type="submit"

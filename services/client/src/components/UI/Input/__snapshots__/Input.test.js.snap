@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> renders a snapshot properly 1`] = `
+<div
+  className="field"
+>
+  <label
+    className="label is-large"
+  >
+    test-label
+  </label>
+  <div
+    className="control has-icons-left"
+  >
+    <input
+      className="input is-large"
+      name="test-name"
+      onChange={[MockFunction]}
+      placeholder="enter some"
+      required={true}
+      value="test-value"
+    />
+    <span
+      className="icon is-left"
+    >
+      <i
+        className="fas fa-test-icon"
+      />
+    </span>
+  </div>
+</div>
+`;
