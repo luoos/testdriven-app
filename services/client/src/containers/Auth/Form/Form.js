@@ -10,7 +10,8 @@ class Form extends React.Component {
       username: '',
       email: '',
       password: ''
-    }
+    },
+    valid: false
   }
 
   componentDidMount() {
@@ -23,10 +24,15 @@ class Form extends React.Component {
     });
   }
 
+  validateForm = () => {
+    this.setState({valid: true});
+  }
+
   handleFormValueChange = (event) => {
     const updatedForm = updateObject(this.state.formData,
       {[event.target.name]: event.target.value});
     this.setState({formData: updatedForm});
+    this.validateForm();
   }
 
   handleUserFormSubmit = (event) => {
@@ -114,6 +120,7 @@ class Form extends React.Component {
             type="submit"
             className="button is-primary is-large is-fullwidth"
             value="submit"
+            disabled={!this.state.valid}
           />
         </form>
       </div>

@@ -56,6 +56,12 @@ describe('<Form />', () => {
       expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledWith(el.formData);
       expect(wrapper.instance().handleUserFormSubmit).toHaveBeenCalledTimes(1);
     })
+
+    it(`${el.formType} Form should be disabled by default`, () => {
+      const wrapper = shallow(component);
+      const input = wrapper.find('input[type="submit"]');
+      expect(input.get(0).props.disabled).toEqual(true);
+    })
   })
 
 })

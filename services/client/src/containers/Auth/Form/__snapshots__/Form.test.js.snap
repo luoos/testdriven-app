@@ -75,6 +75,7 @@ exports[`<Form /> Login Form renders a snapshot properly 1`] = `
     <br />
     <input
       className="button is-primary is-large is-fullwidth"
+      disabled={true}
       type="submit"
       value="submit"
     />
@@ -186,6 +187,7 @@ exports[`<Form /> Register Form renders a snapshot properly 1`] = `
     <br />
     <input
       className="button is-primary is-large is-fullwidth"
+      disabled={true}
       type="submit"
       value="submit"
     />
