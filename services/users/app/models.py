@@ -15,6 +15,15 @@ class Post(db.Model):
     created_time = db.Column(db.DateTime(), default=datetime.utcnow)
     last_updated_time = db.Column(db.DateTime(), default=datetime.utcnow)
 
+    def to_json(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'content': self.content,
+            'created_time': self.created_time.timestamp(),
+            'last_updated_time': self.last_updated_time.timestamp()
+        }
+
 
 class User(db.Model):
     __tablename__ = 'users'
