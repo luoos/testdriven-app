@@ -11,9 +11,11 @@ if os.environ.get('FLASK_COVERAGE'):
 
 import sys  # noqa: ignore=E402
 import click  # noqa: ignore=E402
-from flask_migrate import upgrade
+from flask_migrate import upgrade  # noqa: ignore=E402
+import app.fake as fake  # noqa: ignore=E402
 from app import create_app, db  # noqa: ignore=E402
 from app.models import User  # noqa: ignore=E402
+
 
 app = create_app(os.getenv('FLASK_CONFIG') or 'default')
 
@@ -28,6 +30,11 @@ def recreate_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
+
+
+@app.cli.command()
+def fake_db():
+    fake.posts()
 
 
 @app.cli.command()
@@ -70,6 +77,7 @@ def seed_db():
         password='password'
     ))
     db.session.commit()
+
 
 @app.cli.command()
 def deploy():
