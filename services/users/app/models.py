@@ -6,6 +6,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 
 
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    title = db.Column(db.String(128), nullable=False)
+    content = db.Column(db.Text)
+    created_time = db.Column(db.DateTime(), default=datetime.utcnow)
+    last_updated_time = db.Column(db.DateTime(), default=datetime.utcnow)
+
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -15,6 +25,8 @@ class User(db.Model):
     active = db.Column(db.Boolean(), default=True, nullable=False)
     created_date = db.Column(db.DateTime(), default=datetime.utcnow,
                              nullable=False)
+    posts = db.relationship('Post', backref='author', lazy='dynamic',
+                            foreign_keys=[Post.author_id])
 
     def __init__(self, username, email, password):
         self.username = username
