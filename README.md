@@ -98,6 +98,15 @@ users_dev=# \dt
 users_dev=# select * from users;
 ```
 
+Back up / restore a dockerized postgres database
+
+```shell
+# back up
+docker-compose -f docker-compose-dev.yml exec users-db pg_dumpall -c -U postgres > dump.sql
+# restore
+cat dump.sql | docker-compose -f docker-compose-dev.yml exec -T users-db psql -U postgres
+```
+
 ### Nginx
 
 Serves as a reverse proxy.
