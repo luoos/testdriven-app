@@ -6,6 +6,7 @@ const Post = (props) => {
     <>
       <div className="content">
         <h1>{props.title}</h1>
+        <p className="subtitle is-4">{new Date(props.created_time*1000).toDateString()}</p>
         <p>{props.content}</p>
       </div>
       <br/>
@@ -15,7 +16,9 @@ const Post = (props) => {
 
 Post.prototype = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired,
+  created_time: PropTypes.number.isRequired,
+  last_updated_time: PropTypes.number
 }
 
 export default Post;
