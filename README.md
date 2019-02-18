@@ -2,15 +2,15 @@
 
 [![Build Status](https://travis-ci.org/luoos/testdriven-app.svg?branch=master)](https://travis-ci.org/luoos/testdriven-app)
 
-This is a fullstack project from [testdriven.io](https://testdriven.io/courses/microservices-with-docker-flask-and-react).
+This is a full-stack project from [testdriven.io](https://testdriven.io/courses/microservices-with-docker-flask-and-react).
 
 #### Things used in this project:
 
-**Front-end**: React, Javascript, npm, Jest, enzyme, Bulma
+ - **Front-end**: React, Javascript, npm, Jest, enzyme, Bulma
 
-**Back-end**: Flask, Python, Shell, SQLAlchemy, Postgres, coverage, flake8
+ - **Back-end**: Flask, Python, Shell, SQLAlchemy, Postgres, coverage, flake8
 
-**Others**: Docker, Nginx, Travis CI
+ - **Others**: Docker, Nginx, Travis CI, Cypress, Swagger
 
 ## Getting Started
 
