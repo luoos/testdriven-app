@@ -23,7 +23,6 @@ describe('Register', () => {
 
     // assert user is redirected to '/'
     // assert '/' is displayed properly
-    cy.contains('All Users');
     cy.get('.navbar-burger').click();
     cy.get('.navbar-menu').within(() => {
       cy

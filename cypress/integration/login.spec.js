@@ -35,7 +35,6 @@ describe('Login', () => {
 
     // assert user is redirect to '/'
     // assert '/' is displayed properly
-    cy.contains('All Users');
     cy.get('.navbar-burger').click();
     cy.get('.navbar-menu').within(() => {
       cy
