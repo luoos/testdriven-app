@@ -1,16 +1,16 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import axios from './axios-users';
 import './App.css';
-import UsersList from './components/UsersList/UsersList';
 import About from './components/About/About';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions/index';
 import UserProfile from './containers/UserProfile/UserProfile';
+import Posts from './containers/Posts/Posts';
 
 class App extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   getUsers = () => {
-    axios.get('/api/v1/users')
+    axios.get('/users')
       .then((res) => { this.setState({ users: res.data.data.users })})
       .catch((err) => { console.log(err)})
   }
@@ -37,8 +37,7 @@ class App extends React.Component {
         <section className="section">
           <div className="container">
             <div className="columns">
-              <div className="column is-half">
-                <br/>
+              <div className="column">
                 <Switch>
 
                   <Route exact path='/about' component={About}/>
@@ -57,9 +56,9 @@ class App extends React.Component {
                     <UserProfile isAuthenticated={this.props.isAuthenticated} />
                   )}/>
 
-                  <Route exact path='/' render={() => (
-                    <UsersList users={this.state.users} />
-                  )} />
+                  <Route path='/posts' component={Posts} />
+
+                  <Route exact path='/' render={() => (<Redirect to="/posts?page=1" />)}/>
 
                 </Switch>
               </div>

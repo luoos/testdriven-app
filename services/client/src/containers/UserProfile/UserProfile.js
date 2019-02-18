@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
 
   getUserStatus = () => {
     const options = {
-      url: '/api/v1/auth/status',
+      url: '/auth/status',
       method: 'get',
       headers: {
         'Content-Type': 'application/json',

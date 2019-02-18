@@ -37,10 +37,10 @@ export const auth = (email, password, isSignup, username) => {
       email: email,
       password: password
     }
-    let url = '/api/v1/auth/login'
+    let url = '/auth/login'
     if (isSignup) {
       data.username = username;
-      url = '/api/v1/auth/register'
+      url = '/auth/register'
     }
     axios.post(url, data)
       .then((res => {
