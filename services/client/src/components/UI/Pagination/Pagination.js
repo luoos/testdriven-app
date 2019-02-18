@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import classes from './Pagination.css';
 
 const Pagination = (props) => {
-  console.log(classes);
   return (
     <nav className="pagination" role="navigation" aria-label="pagination">
       <Link
