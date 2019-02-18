@@ -28,3 +28,13 @@ def get_posts():
         }
     }
     return jsonify(response_object), 200
+
+
+@api.route('/post/<int:id>', methods=['GET'])
+def get_post(id):
+    post = Post.query.get_or_404(id)
+    response_object = {
+        'status': 'success',
+        'data': post.to_json()
+    }
+    return jsonify(response_object), 200
