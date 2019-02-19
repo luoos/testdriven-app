@@ -58,7 +58,7 @@ After building, we need to set up the database and fake some data:
 $ docker-compose -f docker-compose-dev.yml exec users flask recreate-db
 
 # Add some fake data to database
-$ docker-compose -f docker-compose-dev.yml exec users flask seed-db 
+$ docker-compose -f docker-compose-dev.yml exec users flask fake-db
 
 # Run flask server test, make sure all test cases pass
 $ docker-compose -f docker-compose-dev.yml exec users flask test
