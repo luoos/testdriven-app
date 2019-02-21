@@ -2,7 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 
 import axios from '../../axios-users';
-import Post from '../../components/Post/Post';
+import PostTemplate from '../../components/PostTemplate/PostTemplate';
 import Pagination from '../../components/UI/Pagination/Pagination';
 
 export default class Posts extends React.Component {
@@ -47,7 +47,7 @@ export default class Posts extends React.Component {
   render() {
     return (
       <>
-        {this.state.posts && this.state.posts.map((p) => (<Post {...p} key={p.id} />))}
+        {this.state.posts && this.state.posts.map((p) => (<PostTemplate {...p} key={p.id} />))}
         <br/>
         <hr/>
         <Pagination
