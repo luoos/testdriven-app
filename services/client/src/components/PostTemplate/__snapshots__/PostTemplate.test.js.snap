@@ -6,12 +6,17 @@ Array [
     className="content"
   >
     <h1>
-      a big name
+      <a
+        href="/post/1"
+        onClick={[Function]}
+      >
+        a big name
+      </a>
     </h1>
     <p
       className="subtitle is-4"
     >
-      Wed Nov 23 51110
+      Fri Mar 22 51107
     </p>
     <p
       className="content"

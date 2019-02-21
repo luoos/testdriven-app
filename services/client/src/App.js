@@ -11,6 +11,7 @@ import Layout from './hoc/Layout/Layout';
 import * as actions from './store/actions/index';
 import UserProfile from './containers/UserProfile/UserProfile';
 import Posts from './containers/Posts/Posts';
+import Post from './containers/Post/Post';
 
 class App extends React.Component {
   state = {
@@ -57,6 +58,8 @@ class App extends React.Component {
                   )}/>
 
                   <Route path='/posts' component={Posts} />
+
+                  <Route path='/post/:id' component={Post} />
 
                   <Route exact path='/' render={() => (<Redirect to="/posts?page=1" />)}/>
 
