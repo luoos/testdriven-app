@@ -1,9 +1,22 @@
 import React from 'react';
-import { Editor, EditorState } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
 
 class DraftEditor extends React.Component {
   state = {
     editorState: EditorState.createEmpty()
+  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  handleKeyCommand = (command, editorState) => {
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return 'handled';
+    }
+    return 'not-handled';
   }
 
   onChange = (editorState) => {
@@ -26,6 +39,7 @@ class DraftEditor extends React.Component {
         <Editor
           ref={this.setEditor}
           editorState={this.state.editorState}
+          handleKeyCommand={this.handleKeyCommand}
           onChange={this.onChange}
         />
       </div>
