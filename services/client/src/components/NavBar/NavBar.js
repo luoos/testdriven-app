@@ -23,6 +23,7 @@ const NavBar = (props) => (
         <div className="navbar-start">
           <Link to="/" className="navbar-item">Home</Link>
           <Link to="/about" className="navbar-item">About</Link>
+          <Link to="/create" className="navbar-item">Create</Link>
         </div>
         <div className="navbar-end">
             {props.isAuthenticated ?

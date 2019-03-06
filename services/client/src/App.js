@@ -12,6 +12,7 @@ import * as actions from './store/actions/index';
 import UserProfile from './containers/UserProfile/UserProfile';
 import Posts from './containers/Posts/Posts';
 import Post from './containers/Post/Post';
+import DraftEditor from './containers/DraftEditor/DraftEditor';
 
 class App extends React.Component {
   state = {
@@ -60,6 +61,8 @@ class App extends React.Component {
                   <Route path='/posts' component={Posts} />
 
                   <Route path='/post/:id' component={Post} />
+
+                  <Route path='/create' component={DraftEditor} />
 
                   <Route exact path='/' render={() => (<Redirect to="/posts?page=1" />)}/>
 
